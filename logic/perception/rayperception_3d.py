@@ -1,12 +1,11 @@
 import numpy as np
 from scipy.spatial import ConvexHull
-from logic.bbox_calculation import bbox_corners
-from logic.hit_point_calculation import calc_hit
-from logic.utils import spherical2cartesian
-import matplotlib.pyplot as plt
+from .hit_point_calculation import calc_hit
+from .utils import spherical2cartesian, bbox_corners
 
-class RayPerception():
+class RayPerception3D():
     def __init__(self, num_layers, num_points_per_layer, fov=np.pi, tilt=-np.pi/8) -> None:
+        super().__init__()
         self.num_layers = num_layers
         self.num_points_per_layer = num_points_per_layer
         self.fov = fov
@@ -19,7 +18,7 @@ class RayPerception():
             rays = np.concatenate([rays,spherical2cartesian(np.ones(len(azimuths)), azimuths, e*np.ones(len(azimuths)))])
         return rays
 
-    def get_lidar_points(self, objects_in_scene: list):
+    def get_hits(self, objects_in_scene: list):
         '''
             assume ray starts in (0,0,0)
         '''
@@ -34,31 +33,3 @@ class RayPerception():
                     hits.append(hit)
         hits_array = np.array(hits)
         return hits_array
-    
-if __name__=="__main__":
-    lidar_sim = RayPerception(32, 100, fov=np.pi/2, tilt=np.pi/4)
-    rays = lidar_sim.get_rays()
-
-    ax = plt.axes(projection='3d')
-    ax.scatter3D(rays[:,0], rays[:,1], rays[:,2], s=2)
-    ax.set_xlabel('x')
-    ax.set_ylabel('y')
-    ax.set_zlabel('z')
-    ax.set_proj_type('ortho')
-    ax.set_aspect('equal','box')
-    ax.view_init(45, 45, 0)
-    plt.tight_layout()
-    plt.show()
-
-    objects_in_scene = [{"h" : 1, "w" : 2, "l" : 5, "x" : 10, "y" : 0, "z" : 0, "yaw" : np.pi/4}]
-    points = lidar_sim.get_lidar_points(objects_in_scene)
-
-    ax = plt.axes(projection='3d')
-    ax.scatter3D(points[:,0], points[:,1], points[:,2], s=2)
-    ax.set_xlabel('x')
-    ax.set_ylabel('y')
-    ax.set_zlabel('z')
-    ax.set_proj_type('ortho')
-    ax.set_aspect('equal','box')
-    ax.view_init(45, 45, 0)
-    plt.tight_layout()
