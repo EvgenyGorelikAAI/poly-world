@@ -47,3 +47,23 @@ def bbox_corners(bbox: Union[dict, np.ndarray]):
     corners = R @ corners
     corners += np.vstack([x, y, z])
     return corners
+
+
+def rotation_matrix_2d(theta):
+    return np.array([[np.cos(theta), -np.sin(theta)],
+                     [np.sin(theta), np.cos(theta)]])
+
+def bbox2d_corners(params: dict):
+    '''
+        input:
+            - params: parameter dict
+    '''
+    w = params.get("w", 0)
+    l = params.get("l", 0)
+    x = params.get("x", 0)
+    y = params.get("y", 0)
+    theta = params.get("yaw", 0)
+    corners = np.array([[x-l/2, x-l/2, x+l/2, x+l/2],
+                        [y-w/2, y+w/2, y-w/2, y+w/2]])
+    corners = rotation_matrix_2d(theta) @ corners
+    return corners
