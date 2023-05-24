@@ -35,7 +35,7 @@ class BoundingBox(Polygon):
         else:
             raise NotImplementedError("Bounding Box type not implemented")
         self.corners = self.get_corners()
-        self.A, self.b = self.constraints(self.corners)
+        self._A, self._b = self.constraints(self.corners)
 
     def get_corners(self):
         R = Rotation.from_euler("xyz", [self.roll, self.pitch, self.yaw], degrees=False).as_matrix()

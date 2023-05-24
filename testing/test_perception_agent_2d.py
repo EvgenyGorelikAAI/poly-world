@@ -15,20 +15,21 @@ if __name__=="__main__":
     ax = plt.axes()
     ax.scatter(points[:,0], points[:,1])
     ax.set_aspect('equal','box')
-    plt.show()
+    plt.waitforbuttonpress(1)
+    plt.cla()
 
     agent.rotate(np.pi/8.)
     points = agent.get_perception(bbox_list)
 
-    ax = plt.axes()
     ax.scatter(points[:,0], points[:,1])
     ax.set_aspect('equal','box')
-    plt.show()
 
     agent.move(np.array([1,0],dtype=float))
     points = agent.get_perception(bbox_list)
+    plt.waitforbuttonpress(1)
+    plt.cla()
 
-    ax = plt.axes()
     ax.scatter(points[:,0], points[:,1])
     ax.set_aspect('equal','box')
-    plt.show()
+    plt.waitforbuttonpress(1)
+    plt.cla()

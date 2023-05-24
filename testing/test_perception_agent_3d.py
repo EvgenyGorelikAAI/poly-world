@@ -22,12 +22,12 @@ if __name__=="__main__":
     ax.set_aspect('equal','box')
     ax.view_init(45, 45, 0)
     plt.tight_layout()
-    plt.show()
+    plt.waitforbuttonpress(1)
+    plt.cla()
 
     agent.rotate(np.array([0,0,np.pi/8.]))
     points = agent.get_perception(bbox_list)
 
-    ax = plt.axes(projection='3d')
     ax.scatter3D(points[:,0], points[:,1], points[:,2], s=2)
     ax.scatter3D(0, 0, 0, s=5, marker="x")
     ax.set_xlabel('x')
@@ -37,7 +37,8 @@ if __name__=="__main__":
     ax.set_aspect('equal','box')
     ax.view_init(45, 45, 0)
     plt.tight_layout()
-    plt.show()
+    plt.waitforbuttonpress(1)
+    plt.cla()
 
     agent.move(np.array([1,0,0],dtype=float))
     points = agent.get_perception(bbox_list)
@@ -52,4 +53,5 @@ if __name__=="__main__":
     ax.set_aspect('equal','box')
     ax.view_init(45, 45, 0)
     plt.tight_layout()
-    plt.show()
+    plt.waitforbuttonpress(1)
+    plt.cla()

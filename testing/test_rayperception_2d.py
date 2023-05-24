@@ -10,12 +10,13 @@ if __name__=="__main__":
     ax = plt.axes()
     ax.scatter(rays[:,0], rays[:,1])
     ax.set_aspect('equal','box')
-    plt.show()
+    plt.waitforbuttonpress(1)
+    plt.cla()
     
     objects_in_scene = [{"w" : 2, "l" : 5, "x" : 5, "y" : 5, "yaw" : 0.2}]
     points = lidar_sim.get_hits(objects_in_scene)
 
-    ax = plt.axes()
     ax.scatter(points[:,0], points[:,1])
-    ax.set_aspect('equal','box')
-    plt.show()
+    ax.set_aspect('equal','box')    
+    plt.waitforbuttonpress(1)
+    plt.cla()

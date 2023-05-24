@@ -16,12 +16,12 @@ if __name__=="__main__":
     ax.set_aspect('equal','box')
     ax.view_init(45, 45, 0)
     plt.tight_layout()
-    plt.show()
+    plt.waitforbuttonpress(1)
+    plt.cla()
 
     objects_in_scene = [{"h" : 1, "w" : 2, "l" : 5, "x" : 10, "y" : 0, "z" : 0, "yaw" : np.pi/4}]
     points = lidar_sim.get_hits(objects_in_scene)
 
-    ax = plt.axes(projection='3d')
     ax.scatter3D(points[:,0], points[:,1], points[:,2], s=2)
     ax.set_xlabel('x')
     ax.set_ylabel('y')
@@ -30,4 +30,5 @@ if __name__=="__main__":
     ax.set_aspect('equal','box')
     ax.view_init(45, 45, 0)
     plt.tight_layout()
-    plt.show()
+    plt.waitforbuttonpress(1)
+    plt.cla()

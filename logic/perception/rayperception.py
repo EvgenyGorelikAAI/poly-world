@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod, abstractproperty
 from typing import Any
 
 class RayPerception(ABC):
@@ -9,4 +9,8 @@ class RayPerception(ABC):
 
     @abstractmethod
     def get_rays(self):
+        raise NotImplementedError
+    
+    @abstractproperty
+    def stochastic(self):
         raise NotImplementedError
